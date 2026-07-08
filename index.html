@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portofolio V5 - Static Clone</title>
+    <meta name="description" content="Static clone of Portofolio V5 by EkiZR. Open directly in browser without npm." />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f310.svg" />
+    <meta name="theme-color" content="#6366f1" />
+    <meta property="og:title" content="EkiZR — Portfolio (Static Clone)" />
+    <meta property="og:description" content="Frontend developer — portfolio showcasing projects and certificates." />
+    <meta property="og:image" content="assets/profile.svg" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      html,body{height:100%}
+      body{font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;}
+      .card-shadow{box-shadow:0 6px 18px rgba(15,23,42,0.08)}
+      .badge-tech{display:inline-flex;align-items:center;font-size:12px;padding:4px 8px;border-radius:9999px;background:#f3f4f6;color:#374151}
+      .glass{background:rgba(255,255,255,0.6);backdrop-filter:blur(6px)}
+    </style>
+  </head>
+  <body class="bg-white text-gray-900">
+    <header class="glass sticky top-0 z-20">
+      <div class="max-w-5xl mx-auto p-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-400 to-pink-300 flex items-center justify-center text-white font-bold">EK</div>
+          <div class="font-semibold">EkiZR</div>
+        </div>
+        <nav class="space-x-6 text-sm">
+          <a href="#home" class="hover:underline">Home</a>
+          <a href="#projects" class="hover:underline">Projects</a>
+          <a href="#certificates" class="hover:underline">Certificates</a>
+          <a href="#about" class="hover:underline">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="home" class="min-h-screen flex items-center">
+        <div class="max-w-5xl mx-auto p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-4">
+            <h1 class="text-4xl md:text-5xl font-extrabold">Hi, I'm Eki Zulfar Rachman</h1>
+            <p class="text-gray-600">Frontend developer — I build beautiful, accessible web apps and admin dashboards.</p>
+            <div class="flex gap-3">
+              <a class="px-4 py-2 bg-indigo-600 text-white rounded" href="#projects">See projects</a>
+              <a class="px-4 py-2 border rounded" href="#contact">Contact</a>
+            </div>
+          </div>
+          <div class="flex items-center justify-center">
+            <div class="w-72 h-72 rounded-xl card-shadow overflow-hidden">
+              <img src="assets/profile.svg" alt="profile" class="w-full h-full object-cover bg-white" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="py-16 bg-gray-50">
+        <div class="max-w-5xl mx-auto p-6">
+          <h2 class="text-2xl font-bold mb-6">Projects</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <article class="p-4 bg-white rounded-lg card-shadow">
+              <div class="h-40 bg-gradient-to-br from-indigo-50 to-pink-50 rounded mb-3 flex items-center justify-center overflow-hidden">
+                <img src="assets/project.svg" alt="project" class="w-full h-full object-cover" />
+              </div>
+              <h3 class="font-semibold">Project Title 1</h3>
+              <p class="text-sm text-gray-600 mb-2">Short description of the project. Tech stack, link, and details.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="badge-tech">React</span>
+                <span class="badge-tech">Tailwind</span>
+                <span class="badge-tech">Vite</span>
+              </div>
+            </article>
+            <article class="p-4 bg-white rounded-lg card-shadow">
+              <div class="h-40 bg-gradient-to-br from-indigo-50 to-pink-50 rounded mb-3 flex items-center justify-center overflow-hidden">
+                <img src="public/assets/project.svg" alt="project" class="w-full h-full object-cover" />
+              </div>
+              <h3 class="font-semibold">Project Title 2</h3>
+              <p class="text-sm text-gray-600 mb-2">Short description of the project. Tech stack, link, and details.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="badge-tech">Next</span>
+                <span class="badge-tech">Supabase</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="certificates" class="py-12">
+        <div class="max-w-5xl mx-auto p-6">
+          <h2 class="text-2xl font-bold mb-6">Certificates</h2>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <div class="p-2 bg-white rounded card-shadow flex items-center justify-center">
+              <img src="assets/certificate.svg" alt="certificate" class="w-full h-28 object-contain" />
+            </div>
+            <div class="p-2 bg-white rounded card-shadow flex items-center justify-center">
+              <img src="public/assets/certificate.svg" alt="certificate" class="w-full h-28 object-contain" />
+            </div>
+            <div class="p-2 bg-white rounded card-shadow flex items-center justify-center">
+              <img src="public/assets/certificate.svg" alt="certificate" class="w-full h-28 object-contain" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="py-16">
+        <div class="max-w-5xl mx-auto p-6">
+          <h2 class="text-2xl font-bold mb-4">About</h2>
+          <p class="text-gray-700">This is a simplified but visually similar version of Portofolio V5. It uses static HTML and Tailwind Play CDN so you can open the file directly without installing dependencies.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t mt-12">
+      <div class="max-w-5xl mx-auto p-6 text-sm text-gray-600">© 2026 Eki Zulfar — Static clone</div>
+    </footer>
+
+  </body>
+</html>
