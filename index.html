@@ -1,109 +1,92 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portofolio V5 - Static Clone</title>
-    <meta name="description" content="Static clone of Portofolio V5 by EkiZR. Open directly in browser without npm." />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f310.svg" />
-    <!doctype html>
-    <html lang="en">
-      <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Dashboard — Portfolio</title>
-        <meta name="description" content="Admin dashboard demo with interactive neural network background." />
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-        <style>
-          body{font-family:'Poppins',system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#ffffff 0%,#f8fafc 60%);}
-          .edge-gradient{background:linear-gradient(90deg,rgba(0,0,0,0.06),transparent 40%);}
-          .neural-canvas{position:fixed;right:0;top:0;bottom:0;width:38vw;max-width:520px;z-index:0}
-          @media(max-width:900px){.neural-canvas{display:none}}
-          .content-wrap{max-width:1100px;margin:0 auto;position:relative;z-index:10}
-          .card-shadow{box-shadow:0 8px 30px rgba(2,6,23,0.08)}
-        </style>
-      </head>
-      <body class="text-gray-900">
-        <div class="neural-canvas edge-gradient">
-          <canvas id="neural" class="w-full h-full neural"></canvas>
-        </div>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <!-- Basic -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="/Photo.jpg" />
+  <!-- preload Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-        <header class="py-6">
-          <div class="content-wrap px-6">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
-                <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-indigo-500 to-pink-400 flex items-center justify-center text-white font-bold">EK</div>
-                <div>
-                  <h1 class="text-xl font-semibold">EkiZR — Dashboard</h1>
-                  <p class="text-sm text-gray-500">Overview & management</p>
-                </div>
-              </div>
-              <div class="flex items-center gap-4">
-                <button class="px-4 py-2 bg-indigo-600 text-white rounded">New Project</button>
-                <div class="text-sm text-gray-600">Admin</div>
-              </div>
-            </div>
-          </div>
-        </header>
+  <link
+    rel="preload"
+    as="style"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    onload="this.onload=null;this.rel='stylesheet'"
+  >
 
-        <main class="content-wrap px-6 pb-20">
-          <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div class="lg:col-span-2">
-              <div class="bg-white rounded-lg p-6 card-shadow">
-                <h2 class="text-lg font-semibold mb-4">Overview</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div class="p-4 bg-gray-50 rounded">
-                    <div class="text-sm text-gray-500">Projects</div>
-                    <div class="text-2xl font-bold">12</div>
-                  </div>
-                  <div class="p-4 bg-gray-50 rounded">
-                    <div class="text-sm text-gray-500">Certificates</div>
-                    <div class="text-2xl font-bold">8</div>
-                  </div>
-                  <div class="p-4 bg-gray-50 rounded">
-                    <div class="text-sm text-gray-500">Comments</div>
-                    <div class="text-2xl font-bold">24</div>
-                  </div>
-                </div>
-                <div class="mt-6">
-                  <h3 class="font-semibold mb-2">Recent Projects</h3>
-                  <ul class="space-y-3">
-                    <li class="p-3 bg-white border rounded flex justify-between items-center">
-                      <div>
-                        <div class="font-semibold">Project Alpha</div>
-                        <div class="text-sm text-gray-500">React, Tailwind</div>
-                      </div>
-                      <div class="text-sm text-gray-500">Published</div>
-                    </li>
-                    <li class="p-3 bg-white border rounded flex justify-between items-center">
-                      <div>
-                        <div class="font-semibold">Project Beta</div>
-                        <div class="text-sm text-gray-500">Vite, Supabase</div>
-                      </div>
-                      <div class="text-sm text-gray-500">Draft</div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+  <noscript>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    >
+  </noscript>
+  
+  <!-- SEO Utama -->
+  <title>Eki Zulfar Rachman | Front-End Web Developer</title>
+  <meta name="description" content="Website resmi Eki Zulfar Rachman, Front-End Web Developer. Saya berfokus pada penciptaan pengalaman digital yang menarik dan selalu berupaya memberikan solusi terbaik dalam setiap proyek yang saya kerjakan." />
+  <meta name="keywords" content="Eki Zulfar Rachman, Eki ZR, Front-End Web Developer, ekizr, Portofolio Eki" />
+  <meta name="author" content="Eki Zulfar Rachman" />
 
-            <aside class="">
-              <div class="bg-white rounded-lg p-6 card-shadow">
-                <h3 class="font-semibold mb-3">Quick Actions</h3>
-                <div class="flex flex-col gap-3">
-                  <button class="px-3 py-2 bg-gray-800 text-white rounded">Upload Image</button>
-                  <button class="px-3 py-2 border rounded">Manage Comments</button>
-                  <button class="px-3 py-2 border rounded">Settings</button>
-                </div>
-              </div>
-            </aside>
-          </section>
-        </main>
+  <!-- Google Search Console -->
 
-        <script src="assets/neural.js"></script>
-      </body>
-    </html>
-      <section id="about" class="py-16">
+
+  <!-- Theme / PWA -->
+  <meta name="theme-color" content="#030014" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ekizr.com/" />
+  <meta property="og:title" content="Eki Zulfar Rachman | Front-End Web Developer" />
+  <meta property="og:description" content="Website resmi dan portofolio Eki Zulfar Rachman, Front-End Web Developer." />
+  <meta property="og:image" content="https://ekizr.com/Meta.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://ekizr.com/" />
+  <meta name="twitter:title" content="Eki Zulfar Rachman | Front-End Web Developer" />
+  <meta name="twitter:description" content="Website resmi dan portofolio Eki Zulfar Rachman." />
+  <meta name="twitter:image" content="https://ekizr.com/Meta.png" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ekizr.com/" />
+
+  <!-- Structured Data: Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Eki Zulfar Rachman",
+    "url": "https://ekizr.com",
+    "image": "https://ekizr.com/Photo.jpg",
+    "jobTitle": "Front-End Web Developer",
+    "description": "Saya berfokus pada penciptaan pengalaman digital yang menarik dan selalu berupaya memberikan solusi terbaik dalam setiap proyek yang saya kerjakan.",
+    "sameAs": [
+      "https://www.linkedin.com/in/ekizr/",
+      "https://www.instagram.com/ekizr_/?hl=id",
+     "https://github.com/EkiZR",
+     "https://www.tiktok.com/@eki_zulfar"
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <!-- Konten teks penting untuk SEO -->
+  <header style="display:none">
+    <h1>Eki Zulfar Rachman</h1>
+    <p>
+      Saya berfokus pada penciptaan pengalaman digital yang menarik dan selalu berupaya memberikan solusi terbaik dalam setiap proyek yang saya kerjakan.
+    </p>
+  </header>
+
+  <!-- Root React -->
+  <div id="root"></div>
+
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+</html>
