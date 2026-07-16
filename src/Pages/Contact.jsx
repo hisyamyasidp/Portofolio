@@ -6,7 +6,6 @@ import Komentar from "../components/Commentar";
 import Swal from "sweetalert2";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import axios from "axios";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -34,39 +33,19 @@ const ContactPage = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    Swal.fire({
-      title: 'Mengirim Pesan...',
-      html: 'Harap tunggu selagi kami mengirim pesan Anda',
-      allowOutsideClick: false,
-      didOpen: () => {
-        Swal.showLoading();
-      }
-    });
+    const subject = encodeURIComponent("Pesan Baru dari Website Portfolio");
+    const body = encodeURIComponent(
+      `Nama: ${formData.name}\nEmail: ${formData.email}\n\nPesan:\n${formData.message}`
+    );
+    const mailtoLink = `mailto:ekizulfarrachman@gmail.com?subject=${subject}&body=${body}`;
 
     try {
-      // Ganti dengan email Anda di FormSubmit
-      const formSubmitUrl = 'https://formsubmit.co/ekizulfarrachman@gmail.com';
-      
-      // Siapkan data form untuk FormSubmit
-      const submitData = new FormData();
-      submitData.append('name', formData.name);
-      submitData.append('email', formData.email);
-      submitData.append('message', formData.message);
-      submitData.append('_subject', 'Pesan Baru dari Website Portfolio');
-      submitData.append('_captcha', 'false'); // Nonaktifkan captcha
-      submitData.append('_template', 'table'); // Format email sebagai tabel
+      window.location.href = mailtoLink;
 
-      await axios.post(formSubmitUrl, submitData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
-     
       Swal.fire({
-        title: 'Berhasil!',
-        text: 'Pesan Anda telah berhasil terkirim!',
-        icon: 'success',
+        title: 'Mengarahkan ke email...',
+        text: 'Aplikasi email Anda akan terbuka. Silakan kirim pesan dari sana.',
+        icon: 'info',
         confirmButtonColor: '#6366f1',
         timer: 2000,
         timerProgressBar: true
@@ -77,31 +56,13 @@ const ContactPage = () => {
         email: "",
         message: "",
       });
-
     } catch (error) {
-      if (error.request && error.request.status === 0) {
-        Swal.fire({
-          title: 'Berhasil!',
-          text: 'Pesan Anda telah berhasil terkirim!',
-          icon: 'success',
-          confirmButtonColor: '#6366f1',
-          timer: 2000,
-          timerProgressBar: true
-        });
-
-        setFormData({
-          name: "",
-          email: "",
-          message: "",
-        });
-      } else {
-        Swal.fire({
-          title: 'Gagal!',
-          text: 'Terjadi kesalahan. Silakan coba lagi nanti.',
-          icon: 'error',
-          confirmButtonColor: '#6366f1'
-        });
-      }
+      Swal.fire({
+        title: 'Gagal!',
+        text: 'Tidak bisa membuka aplikasi email. Silakan kirim pesan langsung ke ekizulfarrachman@gmail.com.',
+        icon: 'error',
+        confirmButtonColor: '#6366f1'
+      });
     } finally {
       setIsSubmitting(false);
     }
