@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useCallback, memo } from 'react';
-import { createClient } from '@supabase/supabase-js';
 import { MessageCircle, UserCircle2, Loader2, AlertCircle, Send, ImagePlus, X, Pin } from 'lucide-react';
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -239,8 +238,12 @@ const Komentar = () => {
         });
     }, []);
 
-    // Fetch pinned comment
-    useEffect(() => {
+useEffect(() => {
+        if (!supabase) {
+            setPinnedComment(null);
+            return;
+        }
+
         const fetchPinnedComment = async () => {
             try {
                 const { data, error } = await supabase
@@ -248,12 +251,12 @@ const Komentar = () => {
                     .select('*')
                     .eq('is_pinned', true)
                     .single();
-                
+
                 if (error && error.code !== 'PGRST116') {
                     console.error('Error fetching pinned comment:', error);
                     return;
                 }
-                
+
                 if (data) {
                     setPinnedComment(data);
                 }
@@ -265,37 +268,40 @@ const Komentar = () => {
         fetchPinnedComment();
     }, []);
 
-    // Fetch regular comments (excluding pinned) and set up real-time subscription
     useEffect(() => {
+        if (!supabase) {
+            setComments([]);
+            return;
+        }
+
         const fetchComments = async () => {
             const { data, error } = await supabase
                 .from('portfolio_comments')
                 .select('*')
                 .eq('is_pinned', false)
                 .order('created_at', { ascending: false });
-            
+
             if (error) {
                 console.error('Error fetching comments:', error);
                 return;
             }
-            
+
             setComments(data || []);
         };
 
         fetchComments();
 
-        // Set up real-time subscription
         const subscription = supabase
             .channel('portfolio_comments')
-            .on('postgres_changes', 
-                { 
-                    event: '*', 
-                    schema: 'public', 
+            .on('postgres_changes',
+                {
+                    event: '*',
+                    schema: 'public',
                     table: 'portfolio_comments',
                     filter: 'is_pinned=eq.false'
-                }, 
+                },
                 () => {
-                    fetchComments(); // Refresh comments when changes occur
+                    fetchComments();
                 }
             )
             .subscribe();
@@ -307,7 +313,8 @@ const Komentar = () => {
 
     const uploadImage = useCallback(async (imageFile) => {
         if (!imageFile) return null;
-        
+        if (!supabase?.storage) return null;
+
         const fileExt = imageFile.name.split('.').pop();
         const fileName = `${Date.now()}_${Math.random().toString(36).substring(2)}.${fileExt}`;
         const filePath = `profile-images/${fileName}`;
@@ -330,10 +337,16 @@ const Komentar = () => {
     const handleCommentSubmit = useCallback(async ({ newComment, userName, imageFile }) => {
         setError('');
         setIsSubmitting(true);
-        
+
+        if (!supabase) {
+            setError('Demo mode: comments are not connected to a database yet.');
+            setIsSubmitting(false);
+            return;
+        }
+
         try {
             const profileImageUrl = await uploadImage(imageFile);
-            
+
             const { error } = await supabase
                 .from('portfolio_comments')
                 .insert([

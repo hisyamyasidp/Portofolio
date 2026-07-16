@@ -137,28 +137,35 @@ export default function FullWidthTabs() {
 
   const fetchData = useCallback(async () => {
     try {
-      // Mengambil data dari Supabase secara paralel
+      if (!supabase) {
+        const cachedProjects = localStorage.getItem('projects');
+        const cachedCertificates = localStorage.getItem('certificates');
+
+        if (cachedProjects) {
+          setProjects(JSON.parse(cachedProjects));
+        }
+        if (cachedCertificates) {
+          setCertificates(JSON.parse(cachedCertificates));
+        }
+        return;
+      }
+
       const [projectsResponse, certificatesResponse] = await Promise.all([
         supabase.from("projects").select("*").order('id', { ascending: false }),
-        supabase.from("certificates").select("*").order('id', { ascending: false }), 
+        supabase.from("certificates").select("*").order('id', { ascending: false }),
       ]);
 
-      // Error handling untuk setiap request
       if (projectsResponse.error) throw projectsResponse.error;
       if (certificatesResponse.error) throw certificatesResponse.error;
 
-      // Supabase mengembalikan data dalam properti 'data'
       const projectData = projectsResponse.data || [];
       const certificateData = certificatesResponse.data || [];
 
       setProjects(projectData);
       setCertificates(certificateData);
 
-      // Store in localStorage (fungsionalitas ini tetap dipertahankan)
       localStorage.setItem("projects", JSON.stringify(projectData));
       localStorage.setItem("certificates", JSON.stringify(certificateData));
-      
-      // Dispatch custom event to notify other components (like About)
       window.dispatchEvent(new Event("portfolioDataUpdated"));
     } catch (error) {
       console.error("Error fetching data from Supabase:", error.message);

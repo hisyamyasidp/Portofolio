@@ -18,8 +18,18 @@ export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const handleLogout = async () => {
-    await supabase.auth.signOut()
-    navigate('/login')
+    if (!supabase) {
+      navigate('/login')
+      return
+    }
+
+    try {
+      await supabase.auth.signOut()
+    } catch (error) {
+      console.error('Logout error:', error)
+    } finally {
+      navigate('/login')
+    }
   }
 
   const SidebarContent = () => (

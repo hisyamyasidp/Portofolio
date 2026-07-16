@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { supabase } from "../supabase";
+import { supabase } from '../supabase'
 import { useNavigate } from 'react-router-dom'
 import { Mail, Lock, LogIn, Sparkles, Eye, EyeOff } from 'lucide-react'
 
@@ -13,19 +13,40 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault()
     setLoading(true)
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password })
-    if (error) { alert(error.message); setLoading(false); return }
 
-    const { data: profile } = await supabase
-      .from('profiles').select('role').eq('id', data.user.id).single()
-
-    if (profile?.role !== 'admin') {
-      alert('Access denied')
-      await supabase.auth.signOut()
+    if (!supabase) {
+      alert('Demo mode: database login is not configured.')
       setLoading(false)
       return
     }
-    navigate('/dashboard')
+
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password })
+      if (error) {
+        alert(error.message)
+        setLoading(false)
+        return
+      }
+
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', data.user.id)
+        .single()
+
+      if (profile?.role !== 'admin') {
+        alert('Access denied')
+        await supabase.auth.signOut()
+        setLoading(false)
+        return
+      }
+
+      navigate('/dashboard')
+    } catch (error) {
+      console.error('Login error:', error)
+      alert('Unable to sign in right now.')
+      setLoading(false)
+    }
   }
 
   return (
